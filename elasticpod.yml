@@ -1,0 +1,51 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2019-12-31T03:50:58Z"
+  labels:
+    name: elastic-search
+  name: elastic-search
+  namespace: elastic-stack
+  resourceVersion: "671"
+  selfLink: /api/v1/namespaces/elastic-stack/pods/elastic-search
+  uid: 773284dc-9eb2-4780-ade3-1fa4f2827788
+spec:
+  containers:
+  - env:
+    - name: discovery.type
+      value: single-node
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    imagePullPolicy: IfNotPresent
+    name: elastic-search
+    ports:
+    - containerPort: 9200
+      protocol: TCP
+    - containerPort: 9300
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-bdqdk
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: node01
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+
